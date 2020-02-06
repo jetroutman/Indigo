@@ -1,0 +1,91 @@
+﻿@model Indigo.Models.Persons
+@{
+    ViewBag.Title = "Home Page";
+}
+
+<div class="row">
+    <div class="form-12 card-form" style="margin-top: 20px;">
+        <label>Filter By Type</label>
+        <select id="FilterType">
+            <option selected disabled hidden value="None">Please select a Person Type</option>
+            @foreach (var pt in Model.PersonType)
+            {
+                <option value="@pt.id">@pt.typeName</option>
+            }
+        </select>
+    </div>
+    <section class="col-12 col-md-12">
+        <h2>Person's Table</h2>
+        <div class="table-container">
+            <div class="table-head">
+                <table id="table-head">
+                    <thead>
+                        <tr>
+                            <th class="fhead">First Name</th>
+                            <th class="mhead">Middle Name</th>
+                            <th class="lhead">Last Name</th>
+                            <th class="emailhead">Email</th>
+                            <th class="action"></th>
+                        </tr>
+                    </thead>
+                </table>
+            </div>
+            <div class="table-body">
+                <table id="person-table">
+                    @foreach (var p in Model.Person)
+                    {
+                        <tr data-val="@p.TypeId" rank-val="@p.RankId">
+                            <td>@p.FName</td>
+                            <td>@p.MName</td>
+                            <td>@p.LName</td>
+                            <td>@p.Email</td>
+                            <td>
+                                <i class="fa fa-trash" aria-hidden="true" onclick="deleteRow(@p.RankId)"></i>
+                                <i class="fas fa-arrow-up" onclick="moveUp(@p.RankId)"></i>
+                                <i class="fas fa-arrow-down" onclick="moveDown(@p.RankId)"></i>
+                            </td>
+                        </tr>
+                    }
+                </table>
+            </div>
+        </div>
+        <div class="button-container col-12">
+            <button diabled class="btn btn-shade-1" onclick="SaveTable()">Save Table</button>
+            <button diabled class="btn btn-shade-4" onclick="Cancel()">Cancel</button>
+        </div>
+    </section>
+    <div class="col-md-12">
+        <section class="Entry-Data col-12 row">
+            <div class="form-12 card-form">
+                <label>First Name</label>
+                <input type="text" id="FName">
+            </div>
+            <div class="form-12 card-form">
+                <label>Middle Name</label>
+                <input type="text" id="MName">
+            </div>
+            <div class="form-12 card-form">
+                <label>Last Name</label>
+                <input type="text" id="LName">
+            </div>
+            <div class="form-12 card-form">
+                <label>Email</label>
+                <input type="text" id="Email">
+            </div>
+            <div class="form-12 card-form">
+                <label>Select Type</label>
+                <select id="Type">
+                    <option selected disabled hidden value="None">Please select a Person Type</option>
+                    @foreach (var pt in Model.PersonType)
+                    {
+                        <option value="@pt.id">@pt.typeName</option>
+                    }
+                </select>
+            </div>
+            <div class="button-container col-12">
+                <button class="btn btn-shade-1" onclick="addPerson()">Add Entry</button>
+                <button class="btn btn-shade-4" onclick="clearFields()">Clear Entry</button>
+            </div>
+        </section>
+    </div>
+</div>
