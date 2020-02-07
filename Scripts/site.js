@@ -59,11 +59,35 @@ function deleteRow(rank) {
 
 function moveUp(rankId) {
     var row = $("tr[rank-val=" + rankId + "]");
+    row.insertBefore(row.prev());
+}
+function moveDown(rankId) {
+    var row = $("tr[rank-val=" + rankId + "]");
+    row.insertAfter(row.next());
+}
 
-    var row = this.parentNode.parentNode,
-        sibling = row.previousElementSibling,
-        anchor = row.nextElementSibling,
-        parent = row.parentNode;
+function Cancel() {
+    location.reload();
+}
 
-    parent.insertBefore(row, sibling);
+function SaveTable() {
+    var rows = $("tr");
+    for (var row in rows) {
+        var data = { 'rank': rank };
+
+        $.ajax({
+            contentType: "application/json; charset=utf-8",
+            data: JSON.stringify(data),
+            dataType: "json",
+            type: "POST",
+            cache: false,
+            url: "/Home/UpdatePerson",
+            success: function (result) {
+                location.reload();
+            },
+            error: function () {
+                alert("Error updating person");
+            }
+        });
+    }
 }

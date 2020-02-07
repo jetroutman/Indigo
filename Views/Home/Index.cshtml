@@ -34,17 +34,17 @@
                 <table id="person-table">
                     @foreach (var p in Model.Person)
                     {
-                        <tr data-val="@p.TypeId" rank-val="@p.RankId">
-                            <td>@p.FName</td>
-                            <td>@p.MName</td>
-                            <td>@p.LName</td>
-                            <td>@p.Email</td>
-                            <td>
-                                <i class="fa fa-trash" aria-hidden="true" onclick="deleteRow(@p.RankId)"></i>
-                                <i class="fas fa-arrow-up" onclick="moveUp(@p.RankId)"></i>
-                                <i class="fas fa-arrow-down" onclick="moveDown(@p.RankId)"></i>
-                            </td>
-                        </tr>
+                    <tr data-val="@p.TypeId" rank-val="@p.RankId">
+                        <td><input type="text" value="@p.FName"></td>
+                        <td><input type="text" value="@p.MName"></td>
+                        <td><input type="text" value="@p.LName"></td>
+                        <td><input type="text" value="@p.Email"></td>
+                        <td>
+                            <i class="fa fa-trash" aria-hidden="true" onclick="deleteRow(@p.RankId)"></i>
+                            <i class="fas fa-arrow-up" onclick="moveUp(@p.RankId)"></i>
+                            <i class="fas fa-arrow-down" onclick="moveDown(@p.RankId)"></i>
+                        </td>
+                    </tr>
                     }
                 </table>
             </div>
@@ -55,7 +55,7 @@
         </div>
     </section>
     <div class="col-md-12">
-        <section class="Entry-Data col-12 row">
+        <section class="Entry-Data col-12 row" style="margin-top: 35px;">
             <div class="form-12 card-form">
                 <label>First Name</label>
                 <input type="text" id="FName">
